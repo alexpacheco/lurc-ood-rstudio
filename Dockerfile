@@ -45,12 +45,12 @@ RUN cd /opt/tmp \
  && yum clean all
 
 # Set default repo
-RUN echo ' ' >> /usr/local/lib64/R/library/base/R/Rprofile
- && echo 'local({' >> /usr/local/lib64/R/library/base/R/Rprofile
- && echo '    r <- getOption("repos")' >> /usr/local/lib64/R/library/base/R/Rprofile
- && echo '    r["CRAN"] <- "http://lib.stat.cmu.edu/R/CRAN"' >> /usr/local/lib64/R/library/base/R/Rprofile
- && echo '    options(repos=r)' >> /usr/local/lib64/R/library/base/R/Rprofile
- && echo '})' >> /usr/local/lib64/R/library/base/R/Rprofile
+RUN echo ' ' >> /usr/local/lib64/R/library/base/R/Rprofile \
+ && echo 'local({' >> /usr/local/lib64/R/library/base/R/Rprofile \
+ && echo '    r <- getOption("repos")' >> /usr/local/lib64/R/library/base/R/Rprofile \
+ && echo '    r["CRAN"] <- "http://lib.stat.cmu.edu/R/CRAN"' >> /usr/local/lib64/R/library/base/R/Rprofile \
+ && echo '    options(repos=r)' >> /usr/local/lib64/R/library/base/R/Rprofile \
+ && echo '})' >> /usr/local/lib64/R/library/base/R/Rprofile \
  && echo ' '  >> /usr/local/lib64/R/library/base/R/Rprofile
 
 
