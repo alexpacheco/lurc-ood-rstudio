@@ -11,8 +11,7 @@ RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.n
  && yum install -y glibc-langpack-en \
  && sed -i.bak -e 's/enabled=0/enable=1/g' /etc/yum.repos.d/CentOS-PowerTools.repo \
  && yum -y install epel-release wget \
- && mkdir -p /opt/tmp && cd /opt/tmp \
- && wget http://repo.okay.com.mx/centos/8/x86_64/release/v8-6.7.17-8.el8.x86_64.rpm http://repo.okay.com.mx/centos/8/x86_64/release/v8-devel-6.7.17-8.el8.x86_64.rpm
+ && mkdir -p /opt/tmp && cd /opt/tmp
 RUN yum -y install which libgit2-devel libssh2-devel cargo bzip2 bzip2-devel cairo cairo-devel \
        cargo curl curl-devel gcc gcc-c++ gcc-gfortran java-1.8.0-openjdk java-1.8.0-openjdk-devel \
        ImageMagick-c++ ImageMagick-c++-devel libRmath-devel \
@@ -23,8 +22,10 @@ RUN yum -y install which libgit2-devel libssh2-devel cargo bzip2 bzip2-devel cai
        which wget xz-libs xz-devel zlib zlib-devel xorg-x11-server-devel \
        mariadb mariadb-devel postgresql postgresql-devel unixODBC-devel.x86_64 \
        gdal gdal-devel proj proj-devel geos geos-devel libsq3-devel udunits2-devel \
-       gsl gsl-devel netcdf-devel poppler-cpp-devel \
-       v8-6.7.17-8.el8.x86_64.rpm v8-devel-6.7.17-8.el8.x86_64.rpm
+       gsl gsl-devel netcdf-devel poppler-cpp-devel 
+RUN wget http://repo.okay.com.mx/centos/8/x86_64/release/v8-6.7.17-8.el8.x86_64.rpm \
+ && wget http://repo.okay.com.mx/centos/8/x86_64/release/v8-devel-6.7.17-8.el8.x86_64.rpm \
+ && yum -y install v8-6.7.17-8.el8.x86_64.rpm v8-devel-6.7.17-8.el8.x86_64.rpm
 
 # Install R 4.0.2
 RUN cd /opt/tmp \
