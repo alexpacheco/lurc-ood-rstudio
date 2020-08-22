@@ -1,4 +1,4 @@
-FROM alexpacheco/rstudio:r-402
+FROM alexpacheco/rstudio:r-402-base
 
 Label "maintainer"="alp514@lehigh.edu" \
       "os"="CentOS 8" \
@@ -7,7 +7,5 @@ Label "maintainer"="alp514@lehigh.edu" \
       "app"="RStudio 1.2.1335" \
       "description"="R 4.0.2 and RStudio 1.2.1335" 
 
-COPY install_rpack.R /opt
-
-RUN Rscript /opt/install_rpack.R base
+RUN Rscript /opt/install_rpack.R lubio
 
