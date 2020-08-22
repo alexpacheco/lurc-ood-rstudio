@@ -1,0 +1,13 @@
+FROM alexpacheco/rstudio:r-402
+
+Label "maintainer"="alp514@lehigh.edu" \
+      "os"="CentOS 8" \
+      "compiler"="GCC 8.3.0" \
+      "app"="R 4.02" \
+      "app"="RStudio 1.2.1335" \
+      "description"="R 4.0.2 and RStudio 1.2.1335" 
+
+COPY install_rpack.R /opt
+
+RUN Rscript /opt/install_rpack.R
+
