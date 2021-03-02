@@ -225,10 +225,12 @@ if ( as.integer(R.Version()$major) >= 4 ) { # R < 4.x
   if ( view == "base" ){
     BiocManager::install(c(tidy,graphics,databases,nlp,stats), update=TRUE, ask=FALSE)
   } else if ( view == "geo" || view == "spatial") {
-    BiocManager::install(c(tidy,graphics,databases,nlp,stats,geo,spatial), update=TRUE, ask=FALSE) 
+#    BiocManager::install(c(tidy,graphics,databases,nlp,stats,geo,spatial), update=TRUE, ask=FALSE) 
+    BiocManager::install(c(geo,spatial), update=TRUE, ask=FALSE) 
     remotes::install_git("https://git.rud.is/hrbrmstr/albersusa.git")
   } else if ( view == "lubio" ) {
-    BiocManager::install(c(tidy,graphics,databases,nlp,stats,lubio), update=TRUE, ask=FALSE)
+#    BiocManager::install(c(tidy,graphics,databases,nlp,stats,lubio), update=TRUE, ask=FALSE)
+    BiocManager::install(c(lubio), update=TRUE, ask=FALSE)
   } else {
     BiocManager::install(c(tidy,graphics,databases,nlp,stats,lubio,geo,spatial), update=TRUE, ask=FALSE)
     remotes::install_git("https://git.rud.is/hrbrmstr/albersusa.git")
