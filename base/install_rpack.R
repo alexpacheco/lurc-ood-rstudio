@@ -181,6 +181,7 @@ if ( as.integer(R.Version()$major) >= 4 ) { # R < 4.x
               'spatstat',
               'spdep',
               'sf', 
+              'terrainr',
 	      'tidycensus',
 	      'tmap',
 	      'tmaptools',
