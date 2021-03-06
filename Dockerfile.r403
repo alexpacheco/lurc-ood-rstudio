@@ -31,6 +31,8 @@ RUN echo ' ' >> /usr/local/lib64/R/library/base/R/Rprofile \
  && echo '})' >> /usr/local/lib64/R/library/base/R/Rprofile \
  && echo ' '  >> /usr/local/lib64/R/library/base/R/Rprofile
 
-
+# Run R when executing container, default option is --version
+ENTRYPOINT ["/usr/local/bin/R"]
+CMD ["--version"]
 
 
