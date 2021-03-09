@@ -48,7 +48,7 @@ RUN cd /opt/ \
  && yum clean all
 
 # Run R when executing container, default option is --version
-ENTRYPOINT ["/usr/local/bin/R"]
+ENTRYPOINT ["/opt/R/4.0.3/bin/R"]
 CMD ["--version"]
 
 
