@@ -7,7 +7,15 @@ Label "maintainer"="alp514@lehigh.edu" \
       "app"="RStudio 1.2.1335" \
       "description"="R 4.0.3 and RStudio 1.2.1335" 
 
-# Install R geospatial packages
-
-RUN Rscript /opt/install_rpack.R geo
+# Install dependencies for geospatial packages
+RUN yum -y install hdf5-devel netcdf-devel \
+ && rm -rf /var/cache/yum \
+ && yum clean all
+ 
+# Install R geo packages
+RUN Rscript -e "source('/opt/install_rpack.R'); BiocManager::install(install_package(geo)); nrow(as.data.frame(installed.packages())) "
+# Install R spactial view packages
+RUN Rscript -e "source('/opt/install_rpack.R'); BiocManager::install(install_package(spatial)); nrow(as.data.frame(installed.packages())) "
+# Install alberusa package
+RUN Rscript -e "remotes::install_git('https://git.rud.is/hrbrmstr/albersusa.git')"
 

@@ -4,22 +4,26 @@ Label "maintainer"="alp514@lehigh.edu" \
       "os"="CentOS 8" \
       "compiler"="GCC 8.3.0" \
       "app"="R 4.0.3" \
-      "app"="RStudio 1.2.1335" \
-      "description"="R 4.0.3 and RStudio 1.2.1335" 
+      "app"="RStudio 1.3.1056" \
+      "description"="R 4.0.3 and RStudio 1.3.1056" 
 
-COPY install_rpack.R /opt
-
-# Downgrade RStudio 1.4.1106 to 1.2.1335
-# Find OOD fix to run either 1.3.959, 1.3.1056, or 1.4.1106
-RUN yum -y remove rstudio-server \
- && cd /opt \
- && wget https://download2.rstudio.org/server/centos6/x86_64/rstudio-server-rhel-1.2.1335-x86_64.rpm \
- && yum -y install rstudio-server-rhel-1.2.1335-x86_64.rpm \
+# Install dependencies for base packages
+RUN yum -y install libjpeg-turbo-devel ImageMagick-c++-devel gtk2-devel java-1.8.0-openjdk \
+       java-1.8.0-openjdk-devel java-1.8.0-openjdk-headless mariadb-devel postgresql-devel \
+       unixODBC-devel hiredis-devel geos geos-devel openssl-devel cyrus-sasl-devel \ 
+       poppler-cpp-devel gsl-devel tesseract-devel gmp-devel mpfr-devel libsodium-devel \
+       udunits2-devel gdal-devel proj-devel libsq3-devel tk-devel\
  && rm -rf /var/cache/yum \
- && rm -f rstudio-server-rhel-1.2.1335-x86_64.rpm \
  && yum clean all
 
 # Install R base packages
-
-RUN Rscript /opt/install_rpack.R base
+RUN Rscript -e "source('/opt/install_rpack.R'); BiocManager::install(install_package(tidy)); nrow(as.data.frame(installed.packages())) "
+# Install R graphics view packages
+RUN Rscript -e "source('/opt/install_rpack.R'); BiocManager::install(install_package(graphics)); nrow(as.data.frame(installed.packages())) "
+# Install R databases view packages
+RUN Rscript -e "source('/opt/install_rpack.R'); BiocManager::install(install_package(databases)); nrow(as.data.frame(installed.packages())) "
+# Install R nlp view packages
+RUN Rscript -e "source('/opt/install_rpack.R'); BiocManager::install(install_package(nlp)); nrow(as.data.frame(installed.packages())) "
+# Install R stats view packages
+RUN Rscript -e "source('/opt/install_rpack.R'); BiocManager::install(install_package(stats)); nrow(as.data.frame(installed.packages())) "
 

@@ -8,6 +8,5 @@ Label "maintainer"="alp514@lehigh.edu" \
       "description"="R 4.0.3 and RStudio 1.2.1335" 
 
 # Install R bio packages
-
-RUN Rscript /opt/install_rpack.R lubio
+RUN Rscript -e "source('/opt/install_rpack.R'); BiocManager::install(install_package(lubio)); nrow(as.data.frame(installed.packages())) "
 
